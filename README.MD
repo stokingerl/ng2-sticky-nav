@@ -1,4 +1,8 @@
-# Installation
+# ng2-sticky-nav
+
+A super simple, native, angular2 directive for navs (or anything) that become sticky as you scroll down.
+
+## Installation
 
 To install this directive in your project, run:
 
@@ -6,7 +10,7 @@ To install this directive in your project, run:
 $ npm install ng2-sticky-nav --save
 ```
 
-# Using this directive
+## Using this directive
 
 and then from your Angular module:
 
@@ -38,16 +42,14 @@ export class AppModule { }
 Once you have imported the module, you can use the directive like so:
 
 ```html
-<div></div>
-<div class="custom-nav-class" ngStickyNav></div>
-<div></div>
+<nav class="custom-nav-class" ngStickyNav></nav>
 ```
 
 The div with `ngStickyNav` will now stick to the top once you reach its original position while scrolling down. It will also return to its original position when scrolling up.
 
-# Important Recommendations
+## Important Recommendations
 
-## Controlling height
+### Controlling height
 
 Since your nav will be removed from the static DOM when it sticks, I recommend setting up your html/css to account for the lost height like so:
 
@@ -79,15 +81,15 @@ Corresponding css:
 }
 ```
 
-## Controlling z-index
+### Controlling z-index
 
 Since your nav will be floating on top of other components, be sure that you style your nav so that its z-index is greater than the components it will go over.
 
 In an attempt to make this directive as simple and generic as possible, this is NOT done out of the box.
 
-# Optional Attributes
+## Optional Attributes
 
-## stickyClass
+### stickyClass
 
 stickyClass gives you the ability to assign a css class to your navbar when sticky. The styling will automatically be removed when the navbar is not sticky. For example, you can use this to add a box shadow to your nav when sticky like so:
 
@@ -115,6 +117,6 @@ stickyClass gives you the ability to assign a css class to your navbar when stic
 
 Now your nav will have a slight shadow when in sticky mode. This example can be useful for when your nav is the same color as the components it will be sitting on top of.
 
-# License
+## License
 
 MIT © [Liam Stokinger](mailto:liamstokinger@gmail.com)
