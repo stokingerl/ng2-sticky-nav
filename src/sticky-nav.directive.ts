@@ -1,5 +1,6 @@
 import { Directive, Input, Renderer, ElementRef, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
 
 @Directive({
     selector: '[ngStickyNav]'
