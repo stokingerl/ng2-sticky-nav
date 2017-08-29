@@ -1,6 +1,8 @@
-import { Directive, Input, Renderer, ElementRef, OnInit } from '@angular/core';
+import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/takeUntil';
 
 @Directive({
     selector: '[ngStickyNav]'
@@ -10,6 +12,7 @@ export class StickyNavDirective implements OnInit {
     private offsetTop: number;
     private lastScroll: number = 0;
     private isSticky: boolean = false;
+    private destroyed = new Subject<void>();
     @Input('stickyClass') stickyClass: string;
 
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
@@ -19,7 +22,14 @@ export class StickyNavDirective implements OnInit {
     ngOnInit(): void {
         this.offsetTop = this.elementRef.nativeElement.offsetTop;
 
-        Observable.fromEvent(window, 'scroll').subscribe(() => this.manageScrollEvent());
+        Observable
+            .fromEvent(window, 'scroll')
+            .takeUntil(this.destroyed)
+            .subscribe(() => this.manageScrollEvent());
+    }
+
+    ngOnDestroy() {
+        this.destroyed.complete();
     }
 
     private manageScrollEvent(): void {
