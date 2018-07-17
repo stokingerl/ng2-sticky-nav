@@ -21,7 +21,7 @@ var StickyNavDirective = /** @class */ (function () {
     StickyNavDirective.prototype.ngOnInit = function () {
         var _this = this;
         this.offsetTop = this.elementRef.nativeElement.offsetTop;
-        rxjs_1.fromEvent(window, 'scroll').subscribe(function () { return _this.manageScrollEvent(); });
+        this.scrollSubscription = rxjs_1.fromEvent(window, 'scroll').subscribe(function () { return _this.manageScrollEvent(); });
     };
     StickyNavDirective.prototype.manageScrollEvent = function () {
         var scroll = window.pageYOffset;
@@ -49,6 +49,11 @@ var StickyNavDirective = /** @class */ (function () {
     };
     StickyNavDirective.prototype.setClass = function (add) {
         this.renderer.setElementClass(this.elementRef.nativeElement, this.stickyClass, add);
+    };
+    StickyNavDirective.prototype.ngOnDestroy = function () {
+        if (this.scrollSubscription) {
+            this.scrollSubscription.unsubscribe();
+        }
     };
     __decorate([
         core_1.Input('stickyClass'),

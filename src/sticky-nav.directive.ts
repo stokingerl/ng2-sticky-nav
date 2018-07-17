@@ -1,14 +1,15 @@
-import { Directive, Input, Renderer, ElementRef, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Directive({
     selector: '[ngStickyNav]'
 })
 
-export class StickyNavDirective implements OnInit {
+export class StickyNavDirective implements OnInit, OnDestroy {
     private offsetTop: number;
     private lastScroll: number = 0;
     private isSticky: boolean = false;
+    private scrollSubscription: Subscription;
     @Input('stickyClass') stickyClass: string;
 
     constructor(private elementRef: ElementRef, private renderer: Renderer) {
@@ -18,7 +19,7 @@ export class StickyNavDirective implements OnInit {
     ngOnInit(): void {
         this.offsetTop = this.elementRef.nativeElement.offsetTop;
 
-        fromEvent(window, 'scroll').subscribe(() => this.manageScrollEvent());
+        this.scrollSubscription = fromEvent(window, 'scroll').subscribe(() => this.manageScrollEvent());
     }
 
     private manageScrollEvent(): void {
@@ -53,4 +54,9 @@ export class StickyNavDirective implements OnInit {
         this.renderer.setElementClass(this.elementRef.nativeElement, this.stickyClass, add);
     }
 
+    ngOnDestroy() {
+        if (this.scrollSubscription) {
+            this.scrollSubscription.unsubscribe();
+        }
+    }
 }
