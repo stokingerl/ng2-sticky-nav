@@ -1,5 +1,5 @@
 import { Directive, Input, Renderer, ElementRef, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { fromEvent } from 'rxjs';
 
 @Directive({
     selector: '[ngStickyNav]'
@@ -18,7 +18,7 @@ export class StickyNavDirective implements OnInit {
     ngOnInit(): void {
         this.offsetTop = this.elementRef.nativeElement.offsetTop;
 
-        Observable.fromEvent(window, 'scroll').subscribe(() => this.manageScrollEvent());
+        fromEvent(window, 'scroll').subscribe(() => this.manageScrollEvent());
     }
 
     private manageScrollEvent(): void {
