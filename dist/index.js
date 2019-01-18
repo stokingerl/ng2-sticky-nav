@@ -22,6 +22,7 @@ var StickyNavModule = /** @class */ (function () {
             ngModule: StickyNavModule_1
         };
     };
+    var StickyNavModule_1;
     StickyNavModule = StickyNavModule_1 = __decorate([
         core_1.NgModule({
             imports: [
@@ -36,7 +37,6 @@ var StickyNavModule = /** @class */ (function () {
         })
     ], StickyNavModule);
     return StickyNavModule;
-    var StickyNavModule_1;
 }());
 exports.StickyNavModule = StickyNavModule;
 //# sourceMappingURL=index.js.map

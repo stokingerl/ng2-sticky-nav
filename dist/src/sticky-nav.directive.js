@@ -20,27 +20,32 @@ var StickyNavDirective = /** @class */ (function () {
     }
     StickyNavDirective.prototype.ngOnInit = function () {
         var _this = this;
-        this.offsetTop = this.elementRef.nativeElement.offsetTop;
         this.scrollSubscription = rxjs_1.fromEvent(window, 'scroll').subscribe(function () { return _this.manageScrollEvent(); });
     };
     StickyNavDirective.prototype.manageScrollEvent = function () {
         var scroll = window.pageYOffset;
-        if (scroll > this.lastScroll && !this.isSticky && scroll >= this.offsetTop) {
+        if (scroll > this.lastScroll && !this.isSticky && scroll >= this.elementRef.nativeElement.offsetTop) {
             this.setSticky();
         }
-        else if (scroll < this.lastScroll && this.isSticky && scroll <= this.offsetTop) {
+        else if (scroll < this.lastScroll && this.isSticky && scroll <= this.originalPosition) {
             this.unsetSticky();
         }
         this.lastScroll = scroll;
     };
     StickyNavDirective.prototype.setSticky = function () {
         this.isSticky = true;
+        this.originalPosition = this.elementRef.nativeElement.offsetTop;
+        this.wrapper = this.elementRef.nativeElement.cloneNode(true);
         this.setStyle('position', 'fixed');
         this.setStyle('top', '0');
         this.setClass(true);
+        this.renderer.setElementStyle(this.wrapper, 'visibility', 'hidden');
+        this.elementRef.nativeElement.parentElement.insertBefore(this.wrapper, this.elementRef.nativeElement);
     };
     StickyNavDirective.prototype.unsetSticky = function () {
         this.isSticky = false;
+        this.originalPosition = 0;
+        this.elementRef.nativeElement.parentElement.removeChild(this.wrapper);
         this.setStyle('position', 'static');
         this.setClass(false);
     };
