@@ -10,7 +10,8 @@
     "outDir": "./dist",
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "files": [
     "index.ts"
@@ -21,6 +22,7 @@
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": true
+    "strictMetadataEmit": true,
+    "genDir": "compiled"
   }
 }

@@ -3,9 +3,10 @@ node_modules/*
 npm-debug.log
 
 # TypeScript
-*.js
+# temp commenting out so can pull from github til npm package updated
+#*.js
 *.map
-*.d.ts
+#*.d.ts
 
 # JetBrains
 .idea

@@ -1,6 +1,6 @@
 # ng2-sticky-nav
 
-A super simple, native, angular2 directive for navs (or anything) that become sticky as you scroll down.
+A super simple, native, Angular 2+ directive for navs (or anything) that become sticky as you scroll down.
 
 ## Installation
 
