@@ -117,6 +117,31 @@ stickyClass gives you the ability to assign a css class to your navbar when stic
 
 Now your nav will have a slight shadow when in sticky mode. This example can be useful for when your nav is the same color as the components it will be sitting on top of.
 
+###stickyEnabled
+
+stickyEnabled gives you the ability to toggle whether the navbar should stick based on external logic.
+
+```html
+<nav class="custom-nav-class" ngStickyNav [stickyEnabled]="customStickyLogic"></nav>
+```
+
+Note: If the condition changes, the element will only update after scrolling past it's original position.  For example, if stickyEnabled is true and the user scrolls past the element, it will become sticky.  If the condition changes to false, the element will remain sticky until it has returned to its original position, and subsequent scrolling will not cause the element to stick.
+
+
+```typescript
+/* sample.component.ts */
+
+export class sampleComponent{
+
+  customStickyLogic:boolean 
+  
+  ngDoCheck(){
+   this.customStickyLogic = this.performLogicCheck();
+  }
+}
+
+```
+
 ## License
 
 MIT © [Liam Stokinger](mailto:liamstokinger@gmail.com)
