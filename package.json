@@ -1,6 +1,6 @@
 {
   "name": "ng2-sticky-nav",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "scripts": {
     "build": "ngc -p tsconfig.json",
     "lint": "tslint src/**/*.ts",
