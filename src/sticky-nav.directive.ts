@@ -1,4 +1,4 @@
-import { Directive, Input, Renderer, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Input, Renderer2, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 
 @Directive({
@@ -14,7 +14,7 @@ export class StickyNavDirective implements OnInit, OnDestroy {
   @Input('stickyClass') stickyClass: string;
   @Input() stickyEnabled: boolean = true;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer) {
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
 
   }
 
@@ -43,8 +43,8 @@ export class StickyNavDirective implements OnInit, OnDestroy {
     this.wrapper = this.elementRef.nativeElement.cloneNode(true);
     this.setStyle('position', 'fixed');
     this.setStyle('top', '0');
-    this.setClass(true);
-    this.renderer.setElementStyle(this.wrapper, 'visibility', 'hidden');
+    this.addClass();
+    this.renderer.setStyle(this.wrapper, 'visibility', 'hidden');
     this.elementRef.nativeElement.parentElement.insertBefore(this.wrapper, this.elementRef.nativeElement);
   }
 
@@ -53,15 +53,19 @@ export class StickyNavDirective implements OnInit, OnDestroy {
     this.originalPosition = 0;
     this.elementRef.nativeElement.parentElement.removeChild(this.wrapper);
     this.setStyle('position', 'static');
-    this.setClass(false);
+    this.removeClass();
   }
 
   private setStyle(key: string, value: string): void {
-    this.renderer.setElementStyle(this.elementRef.nativeElement, key, value);
+    this.renderer.setStyle(this.elementRef.nativeElement, key, value);
   }
 
-  private setClass(add: boolean): void {
-    this.renderer.setElementClass(this.elementRef.nativeElement, this.stickyClass, add);
+  private addClass(): void {
+    this.renderer.addClass(this.elementRef.nativeElement, this.stickyClass);
+  }
+  
+  private removeClass(): void {
+    this.renderer.removeClass(this.elementRef.nativeElement, this.stickyClass);
   }
 
   ngOnDestroy() {

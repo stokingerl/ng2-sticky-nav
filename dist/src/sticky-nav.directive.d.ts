@@ -1,4 +1,4 @@
-import { Renderer, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Renderer2, ElementRef, OnInit, OnDestroy } from '@angular/core';
 export declare class StickyNavDirective implements OnInit, OnDestroy {
     private elementRef;
     private renderer;
@@ -8,12 +8,14 @@ export declare class StickyNavDirective implements OnInit, OnDestroy {
     private scrollSubscription;
     private wrapper;
     stickyClass: string;
-    constructor(elementRef: ElementRef, renderer: Renderer);
+    stickyEnabled: boolean;
+    constructor(elementRef: ElementRef, renderer: Renderer2);
     ngOnInit(): void;
     private manageScrollEvent;
     private setSticky;
     private unsetSticky;
     private setStyle;
-    private setClass;
+    private addClass;
+    private removeClass;
     ngOnDestroy(): void;
 }
