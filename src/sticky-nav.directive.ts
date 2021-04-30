@@ -41,13 +41,21 @@ export class StickyNavDirective implements OnInit, OnDestroy {
     this.isSticky = true;
     this.originalPosition = this.elementRef.nativeElement.offsetTop;
     this.wrapper = this.elementRef.nativeElement.cloneNode(true);
+    this.removeIds();
     this.setStyle('position', 'fixed');
     this.setStyle('top', '0');
     this.addClass();
     this.renderer.setStyle(this.wrapper, 'visibility', 'hidden');
     this.elementRef.nativeElement.parentElement.insertBefore(this.wrapper, this.elementRef.nativeElement);
   }
-
+  private removeIds() {
+    const {height: initHeight, width: initWidth} = this.wrapper.getBoundingClientRect();
+    Array.from(this.wrapper.querySelectorAll('*')).forEach(el => this.renderer.removeAttribute(el, 'id'));
+    const {height: postHeight, width: postWidth} = this.wrapper.getBoundingClientRect();
+    if (initWidth !== postWidth || initHeight !== postHeight) {
+      throw new Error(`Size mismatch between sticky element and clone - please ensure you aren't using IDs for styling.`);
+    }
+  }
   private unsetSticky(): void {
     this.isSticky = false;
     this.originalPosition = 0;

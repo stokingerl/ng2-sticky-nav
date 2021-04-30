@@ -1,6 +1,6 @@
 {
     "name": "ng2-sticky-nav",
-    "version": "9.0.1",
+    "version": "10.0.0",
     "scripts": {
         "build": "ngc -p tsconfig.json",
         "lint": "tslint src/**/*.ts",
@@ -24,13 +24,15 @@
         "url": "https://github.com/stokingerl/ng2-sticky-nav/issues"
     },
     "main": "./dist/index.js",
-    "dependencies": {},
+    "dependencies": {
+        "request": "^2.88.2"
+    },
     "devDependencies": {
-        "@angular/common": "^9.0.0",
-        "@angular/compiler": "^9.0.0",
-        "@angular/compiler-cli": "^9.0.0",
-        "@angular/core": "^9.0.0",
-        "@angular/platform-server": "^9.0.0",
+        "@angular/common": "^10.2.5",
+        "@angular/compiler": "^10.2.5",
+        "@angular/compiler-cli": "^10.2.5",
+        "@angular/core": "^10.2.5",
+        "@angular/platform-server": "^10.2.5",
         "@types/es6-shim": "^0.31.32",
         "@types/jasmine": "^2.5.40",
         "@types/protractor": "^4.0.0",
@@ -38,7 +40,7 @@
         "codelyzer": "^0.0.28",
         "rxjs": "~6.3.3",
         "tslint": "^3.15.1",
-        "typescript": "~3.1.6",
+        "typescript": "^4.0.7",
         "zone.js": "^0.8.26"
     },
     "engines": {

@@ -16,7 +16,7 @@ export * from './src/sticky-nav.directive';
   ]
 })
 export class StickyNavModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<StickyNavModule> {
     return {
       ngModule: StickyNavModule
     };
